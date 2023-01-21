@@ -11,7 +11,7 @@ const GlobalStyles = createGlobalStyle`
     color: ${props => props.theme.colors.text};
     font: 400 16px 'Roboto', sans-serif;
   }
-  ::-webkit-scrollbar {
+  /* ::-webkit-scrollbar {
     width: 0.6rem;
     height: 0.6rem;
     margin-right: 10px;
@@ -28,7 +28,7 @@ const GlobalStyles = createGlobalStyle`
   ::-webkit-scrollbar-track {
     background-color: transparent;
     border: none;
-  }
+  } */
   button {
       cursor: pointer;
       border: none;

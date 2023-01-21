@@ -11,7 +11,11 @@ interface PropsUserContext {
 }
 
 const DEFAULT_VALUE = {
-    user: { userId: '', name: '', role: '' },
+    user: {
+        userId: '100cd77f-a837-4247-a1e3-1f90ff6e7440',
+        name: '',
+        role: '',
+    },
 };
 
 const UserContext = createContext<PropsUserContext>(DEFAULT_VALUE);
@@ -25,6 +29,7 @@ function UserContextProvider({ children }: UserProviderProps): JSX.Element {
     const contextValue = useMemo(
         () => ({
             user,
+            setUser,
         }),
         [user]
     );

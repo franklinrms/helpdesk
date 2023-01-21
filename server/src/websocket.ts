@@ -3,8 +3,8 @@ import { io } from './app'
 
 io.on('connection', (socket) => {
 
-    socket.on('request_id', (data) => {
-        void socket.join(data.requestId)
+    socket.on('request_id', (requestId) => {
+        void socket.join(requestId)
 
     } )
 
