@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { io } from 'socket.io-client';
+import { baseURL } from '../../lib/api';
 
 export default function Chat(): JSX.Element {
     const [newMessage, setNewMessage] = useState('');
     const requestId = 'c806751c-ab45-4f2b-a074-e8a02c7fc73f';
 
-    const socket = io('http://localhost:3030');
+    const socket = io(baseURL);
 
     socket.emit('request_id', { requestId });
 
@@ -33,7 +34,6 @@ export default function Chat(): JSX.Element {
                 }}
                 // onKeyDown={onsubmit}
             />
-            <p>test</p>
         </div>
     );
 }
