@@ -9,20 +9,20 @@ export default function Chat(): JSX.Element {
 
     socket.emit('request_id', { requestId });
 
-    socket.on('message', data => {
-        console.log('data', data);
-    });
+    // socket.on('message', data => {
+    //     console.log('data', data);
+    // });
 
-    const onsubmit = event => {
-        if (event.key === 'Enter') {
-            socket.emit('message', {
-                message: newMessage,
-                requestId,
-                userId: '100cd77f-a837-4247-a1e3-1f90ff6e7440',
-            });
-            setNewMessage('');
-        }
-    };
+    // const onsubmit = event => {
+    //     if (event.key === 'Enter') {
+    //         socket.emit('message', {
+    //             message: newMessage,
+    //             requestId,
+    //             userId: '100cd77f-a837-4247-a1e3-1f90ff6e7440',
+    //         });
+    //         setNewMessage('');
+    //     }
+    // };
     return (
         <div>
             <input
@@ -31,8 +31,9 @@ export default function Chat(): JSX.Element {
                 onChange={event => {
                     setNewMessage(event.target.value);
                 }}
-                onKeyDown={onsubmit}
+                // onKeyDown={onsubmit}
             />
+            <p>test</p>
         </div>
     );
 }
