@@ -1,9 +1,10 @@
-import app from './app';
+import { serverHttp } from './app';
+import './websocket'
 import 'dotenv/config';
 
 const PORT = process.env.PORT ?? 3031;
 
-const server = app.listen(PORT, () => { console.log(
+const server = serverHttp.listen(PORT, () => { console.log(
   `Server is running on PORT: ${PORT}`,
 ); });
 
