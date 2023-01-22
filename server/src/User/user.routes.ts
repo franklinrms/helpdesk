@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Router } from 'express';
 import userController from './user.controller';
-// import inputValidator from '../middlewares/inputValidator';
 import validateToken from '../middlewares/validateToken';
 
 const userRoutes = Router();

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React, { useMemo, useState, createContext } from 'react';
 
 interface UserType {
@@ -8,14 +9,16 @@ interface UserType {
 
 interface PropsUserContext {
     user: UserType;
+    setUser: React.Dispatch<React.SetStateAction<UserType>>;
 }
 
 const DEFAULT_VALUE = {
     user: {
-        userId: '100cd77f-a837-4247-a1e3-1f90ff6e7440',
+        userId: '',
         name: '',
         role: '',
     },
+    setUser: () => {},
 };
 
 const UserContext = createContext<PropsUserContext>(DEFAULT_VALUE);
