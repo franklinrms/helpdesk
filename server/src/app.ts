@@ -4,6 +4,7 @@ import cors from 'cors';
 import 'express-async-errors';
 import routes from './routes';
 import { Server } from 'socket.io';
+import errorHandler from './middlewares/errorHandler';
 
 const app = express();
 
@@ -18,5 +19,6 @@ const io = new Server(serverHttp, {
 app.use(cors())
 app.use(express.json());
 app.use(routes);
+app.use(errorHandler);
 
 export { serverHttp, io};

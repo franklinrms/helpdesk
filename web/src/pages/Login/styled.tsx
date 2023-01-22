@@ -71,6 +71,7 @@ export const Form = styled.form`
 
         &:disabled {
             background: ${({ theme }) => theme.colors.green_700};
+            color: ${({ theme }) => theme.colors.text};
         }
     }
 `;
