@@ -19,7 +19,7 @@ const theme: any = {
         gray_300: '#7c7c8a',
         text: '#c4c4cc',
         gray_100: '#e1e1e6',
-        withe: '#ffffff',
+        white: '#ffffff',
     },
     mixins,
 };
