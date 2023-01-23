@@ -6,16 +6,29 @@ export const ContainerChat = styled.div`
     height: 100%;
     position: relative;
 
-    .details {
+    .header {
+        ${({ theme }) => theme.mixins.flexBetween};
+        padding: 0 20px;
         width: 100%;
         height: 60px;
-        border: 1px solid ${({ theme }) => theme.colors.surface_primary};
+        border-right: 1px solid ${({ theme }) => theme.colors.surface_primary};
         background-color: ${({ theme }) => theme.colors.background};
+    }
+
+    .customerInfo {
+        p {
+            color: ${({ theme }) => theme.colors.gray_100};
+            font-weight: 500;
+        }
+        span {
+            font-size: 12px;
+            color: ${({ theme }) => theme.colors.gray_300};
+        }
     }
 
     form {
         ${({ theme }) => theme.mixins.flexBetween};
-        border: 1px solid ${({ theme }) => theme.colors.surface_primary};
+        border-right: 1px solid ${({ theme }) => theme.colors.surface_primary};
         width: 100%;
         padding: 10px 20px;
         background-color: ${({ theme }) => theme.colors.background};
@@ -48,14 +61,13 @@ export const ContainerChat = styled.div`
 `;
 
 export const ContainerMessages = styled.ul`
-    height: calc(100vh - 120px - 73px);
+    height: calc(100vh - 120px - 70px);
     overflow-y: auto;
     overflow-x: hidden;
     padding: 20px 30px;
     display: flex;
     flex-direction: column;
-
-    /* scroll-snap-align: end; */
+    border-right: 1px solid ${({ theme }) => theme.colors.surface_primary};
 
     ::-webkit-scrollbar {
         width: 0.6rem;

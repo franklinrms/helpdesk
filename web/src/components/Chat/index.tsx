@@ -7,6 +7,7 @@ import * as S from './styled';
 import theme from '../../styles/theme';
 import formattedDate from '../../lib/formattedDate';
 import { io } from 'socket.io-client';
+import RequestControls from '../RequestControls';
 
 interface MessageType {
     id: string;
@@ -70,10 +71,14 @@ export default function Chat(): JSX.Element {
 
     return (
         <S.ContainerChat>
-            <div className="details">
-                <p>{details?.customer?.name}</p>
-                <p>id do cliente: {details?.customer?.id}</p>
+            <div className="header">
+                <div className="customerInfo">
+                    <p>{details?.customer?.name}</p>
+                    <span>id do cliente: {details?.customer?.id}</span>
+                </div>
+                <RequestControls requestId={requestId} />
             </div>
+
             <S.ContainerMessages ref={listRef}>
                 {messages.map(message => (
                     <div
@@ -91,6 +96,7 @@ export default function Chat(): JSX.Element {
                     </div>
                 ))}
             </S.ContainerMessages>
+
             <form
                 onSubmit={event => {
                     event.preventDefault();

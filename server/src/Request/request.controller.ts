@@ -35,6 +35,7 @@ const readOne = async (req: Request, res: Response): Promise<Response> => {
 const requestInProgress = async (req: Request, res: Response): Promise<Response> => {
     const { user } = res.locals;
 
+    console.log("🚀 ~ file: request.controller.ts:42 ~ requestInProgress ~ req.params.id", req.params.id)
     if (user.role === 'USER') {
         return res.status(403).json({ message: unauthorized });
     }
