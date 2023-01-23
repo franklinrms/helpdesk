@@ -26,7 +26,9 @@ export default function Requests(): JSX.Element {
 
     const getRequests = async (): Promise<void> => {
         try {
-            const { data } = await api.get('request');
+            const { data } = await api.get(
+                `/request?filter=${isSelectedFilter}`
+            );
             setRequests(data);
         } catch (error) {
             console.error(error);
@@ -34,7 +36,7 @@ export default function Requests(): JSX.Element {
     };
     useEffect(() => {
         void getRequests();
-    }, []);
+    }, [isSelectedFilter]);
 
     socket.on('request_update', () => {
         void getRequests();

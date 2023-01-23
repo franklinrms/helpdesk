@@ -13,13 +13,15 @@ const create = async (req: Request, res: Response): Promise<Response> => {
     return res.status(201).json(response);
 };
 
-const readAll = async (_req: Request, res: Response): Promise<Response> => {
+const readAll = async (req: Request, res: Response): Promise<Response> => {
+    const { filter } = req.query;
+    console.log("🚀 ~ file: request.controller.ts:18 ~ readAll ~ filter", filter)
     // const { user } = res.locals;
 
     // if (user.role === 'USER') {
     //     return res.status(403).json({ message: unauthorized });
     // }
-    const response = await requestService.readAll();
+    const response = await requestService.read(filter === 'DONE' ? 'equals' : 'not');
 
     return res.status(200).json(response);
 }

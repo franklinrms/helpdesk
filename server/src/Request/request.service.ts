@@ -4,7 +4,16 @@ import { ErrorTypes } from "../errors/catalog";
 import { IRequest } from "./request.interfaces";
 
 
-const readAll = async (): Promise<IRequest[]> =>  await prisma.request.findMany();
+const read = async (type: string): Promise<IRequest[]> =>  await prisma.request.findMany(
+    {
+        where:{
+            status:{
+                [type]: "DONE",
+            }
+
+        }
+    }
+);
 
 const readOne = async (id: string): Promise<IRequest> => {
     const request = await prisma.request.findUnique(
@@ -69,4 +78,4 @@ const done = async (id: string): Promise<void> => {
     });
 }
 
-export default { readAll, readOne, create, inProgress, done }
+export default { read, readOne, create, inProgress, done }
