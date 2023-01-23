@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import UserContext from '../../context/UserContext';
 import api from '../../lib/api';
 import RequestCard from '../RequestCard';
 import * as S from './styled';
@@ -13,10 +14,15 @@ export interface RequestType {
 
 export default function Requests(): JSX.Element {
     const [requests, setRequests] = useState([]);
+    const { userAuth } = useContext(UserContext);
+
+    useEffect(() => {
+        userAuth();
+    }, []);
 
     const getRequests = async (): Promise<void> => {
         try {
-            const { data } = await api.get('requests');
+            const { data } = await api.get('request');
             setRequests(data);
         } catch (error) {
             console.error(error);
@@ -26,7 +32,7 @@ export default function Requests(): JSX.Element {
         void getRequests();
     }, []);
 
-    // if (!requests) return <div>sem requisições</div>;
+    if (requests.length === 0) return <div>sem requisições</div>;
 
     return (
         <S.RequestsContainer>

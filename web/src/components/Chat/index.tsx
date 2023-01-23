@@ -16,20 +16,33 @@ interface MessageType {
     createdAt: string;
 }
 
+interface DetailsType {
+    title: string;
+    status: string;
+    createdAt?: string;
+    customer?: {
+        name: string;
+        id: string;
+    };
+    messages?: [];
+}
+
 export default function Chat(): JSX.Element {
     const [newMessage, setNewMessage] = useState('');
     const [messages, setMessages] = useState<MessageType[]>([]);
+    const [details, setDetails] = useState<DetailsType>();
     const { user } = useContext(UserContext);
 
     const location = useLocation();
     const requestId = location.pathname.split('/')[3];
-    console.log('🚀 ~ file: index.tsx:26 ~ Chat ~ requestId', requestId);
     const socket = io(baseURL);
 
     const getMessages = async (): Promise<void> => {
         try {
-            const { data } = await api.get(`requests/${requestId}`);
-            setMessages(data);
+            const { data } = await api.get(`request/${requestId}`);
+            setMessages(data.messages);
+            data.messages = [];
+            setDetails(data);
         } catch (error) {
             console.error(error);
         }
@@ -58,7 +71,8 @@ export default function Chat(): JSX.Element {
     return (
         <S.ContainerChat>
             <div className="details">
-                <p>Chat</p>
+                <p>{details?.customer?.name}</p>
+                <p>id do cliente: {details?.customer?.id}</p>
             </div>
             <S.ContainerMessages>
                 {messages.map(message => (

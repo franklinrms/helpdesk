@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React, { useMemo, useState, createContext } from 'react';
+import api, { setToken } from '../lib/api';
 
-interface UserType {
+export interface UserType {
     userId: string;
     name: string;
     role: string;
@@ -9,7 +10,7 @@ interface UserType {
 
 interface PropsUserContext {
     user: UserType;
-    setUser: React.Dispatch<React.SetStateAction<UserType>>;
+    userAuth: () => void;
 }
 
 const DEFAULT_VALUE = {
@@ -18,7 +19,7 @@ const DEFAULT_VALUE = {
         name: '',
         role: '',
     },
-    setUser: () => {},
+    userAuth: () => {},
 };
 
 const UserContext = createContext<PropsUserContext>(DEFAULT_VALUE);
@@ -29,10 +30,28 @@ interface UserProviderProps {
 function UserContextProvider({ children }: UserProviderProps): JSX.Element {
     const [user, setUser] = useState(DEFAULT_VALUE.user);
 
+    const getToken = (): void => {
+        const token = sessionStorage.getItem(
+            '94c8aa2452bccd82ee129b46f7c4be79'
+        );
+        if (token !== null) setToken(JSON.parse(token));
+    };
+
+    const userAuth = async (): Promise<void> => {
+        getToken();
+
+        try {
+            const { data } = await api.get('/validate');
+            setUser(data);
+        } catch (error) {
+            window.location.href = '/';
+        }
+    };
+
     const contextValue = useMemo(
         () => ({
             user,
-            setUser,
+            userAuth,
         }),
         [user]
     );

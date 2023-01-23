@@ -3,7 +3,6 @@ import { Envelope, Key } from 'phosphor-react';
 import * as S from './styled';
 import bg from '../../assets/auth-page-bg.svg';
 import api from '../../lib/api';
-import useAuth from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 
 export default function Login(): JSX.Element {
@@ -18,8 +17,6 @@ export default function Login(): JSX.Element {
 
             const token = JSON.stringify(data);
             sessionStorage.setItem('94c8aa2452bccd82ee129b46f7c4be79', token);
-
-            void useAuth();
             navigate('/inbox/');
         } catch (error) {
             // setDeniedUser(true);
