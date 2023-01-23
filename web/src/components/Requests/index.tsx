@@ -15,6 +15,7 @@ export interface RequestType {
 
 export default function Requests(): JSX.Element {
     const [requests, setRequests] = useState([]);
+    const [isSelectedFilter, setIsSelectedFilter] = useState('IN_PROGRESS');
 
     const socket = io(baseURL);
     const { userAuth } = useContext(UserContext);
@@ -42,7 +43,35 @@ export default function Requests(): JSX.Element {
     if (requests.length === 0) return <div>sem requisições</div>;
 
     return (
-        <S.RequestsContainer>
+        <S.RequestsContainer filter={isSelectedFilter}>
+            <div className="details">
+                <h3>Solicitações</h3>
+                <span>{requests.length}</span>
+            </div>
+
+            <div className="filters">
+                <button
+                    type="button"
+                    className={
+                        isSelectedFilter === 'IN_PROGRESS' ? 'selected' : ''
+                    }
+                    onClick={() => {
+                        setIsSelectedFilter('IN_PROGRESS');
+                    }}
+                >
+                    em andamento
+                </button>
+                <button
+                    type="button"
+                    className={isSelectedFilter === 'DONE' ? 'selected' : ''}
+                    onClick={() => {
+                        setIsSelectedFilter('DONE');
+                    }}
+                >
+                    finalizados
+                </button>
+            </div>
+
             {requests.map((request: RequestType) => (
                 <RequestCard key={request.id} request={request} />
             ))}

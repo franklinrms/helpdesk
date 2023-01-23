@@ -14,7 +14,7 @@ export const Container = styled.header`
         button {
             ${({ theme }) => theme.mixins.flexCenter};
             padding: 10px;
-            transition: all 0.2s ease 0s, color 0.2s ease 0s;
+            transition: all 0.2s ease 0s, transform 0.2s ease 0s;
 
             &:active {
                 transform: scale(0.9);
