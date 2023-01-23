@@ -18,6 +18,7 @@ export const RequestsContainer = styled.div`
         width: 0.6rem;
         height: 0.6rem;
         margin-right: 10px;
+        display: none;
     }
     ::-webkit-scrollbar-corner {
         background: none;

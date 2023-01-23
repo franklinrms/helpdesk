@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { PaperPlaneRight } from 'phosphor-react';
-import { io } from 'socket.io-client';
 import UserContext from '../../context/UserContext';
 import api, { baseURL } from '../../lib/api';
 import * as S from './styled';
 import theme from '../../styles/theme';
 import formattedDate from '../../lib/formattedDate';
+import { io } from 'socket.io-client';
 
 interface MessageType {
     id: string;
@@ -32,10 +32,10 @@ export default function Chat(): JSX.Element {
     const [messages, setMessages] = useState<MessageType[]>([]);
     const [details, setDetails] = useState<DetailsType>();
     const { user } = useContext(UserContext);
-
+    const listRef = useRef<HTMLUListElement | null>(null);
+    const socket = io(baseURL);
     const location = useLocation();
     const requestId = location.pathname.split('/')[3];
-    const socket = io(baseURL);
 
     const getMessages = async (): Promise<void> => {
         try {
@@ -48,8 +48,8 @@ export default function Chat(): JSX.Element {
         }
     };
     useEffect(() => {
-        void getMessages();
-    }, []);
+        if (requestId !== undefined) void getMessages();
+    }, [requestId]);
 
     socket.emit('request_id', requestId);
 
@@ -66,7 +66,7 @@ export default function Chat(): JSX.Element {
         setNewMessage('');
     };
 
-    if (requestId === undefined) return <div> Selecione o chamado</div>;
+    if (requestId === undefined) return <div />;
 
     return (
         <S.ContainerChat>
@@ -74,7 +74,7 @@ export default function Chat(): JSX.Element {
                 <p>{details?.customer?.name}</p>
                 <p>id do cliente: {details?.customer?.id}</p>
             </div>
-            <S.ContainerMessages>
+            <S.ContainerMessages ref={listRef}>
                 {messages.map(message => (
                     <div
                         key={message.id}

@@ -14,6 +14,7 @@ export interface RequestType {
 
 export default function Requests(): JSX.Element {
     const [requests, setRequests] = useState([]);
+    // const [test, setTest] = useState(0);
     const { userAuth } = useContext(UserContext);
 
     useEffect(() => {
@@ -32,10 +33,15 @@ export default function Requests(): JSX.Element {
         void getRequests();
     }, []);
 
+    // socket.on('message', () => {
+    //     setTest(test + 1);
+    // });
+
     if (requests.length === 0) return <div>sem requisições</div>;
 
     return (
         <S.RequestsContainer>
+            {/* <h1>{test}</h1> */}
             {requests.map((request: RequestType) => (
                 <RequestCard key={request.id} request={request} />
             ))}

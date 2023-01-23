@@ -14,11 +14,11 @@ const create = async (req: Request, res: Response): Promise<Response> => {
 };
 
 const readAll = async (_req: Request, res: Response): Promise<Response> => {
-    const { user } = res.locals;
+    // const { user } = res.locals;
 
-    if (user.role === 'USER') {
-        return res.status(403).json({ message: unauthorized });
-    }
+    // if (user.role === 'USER') {
+    //     return res.status(403).json({ message: unauthorized });
+    // }
     const response = await requestService.readAll();
 
     return res.status(200).json(response);

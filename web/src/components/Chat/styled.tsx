@@ -47,13 +47,15 @@ export const ContainerChat = styled.div`
     }
 `;
 
-export const ContainerMessages = styled.div`
+export const ContainerMessages = styled.ul`
     height: calc(100vh - 120px - 73px);
     overflow-y: auto;
     overflow-x: hidden;
     padding: 20px 30px;
     display: flex;
     flex-direction: column;
+
+    /* scroll-snap-align: end; */
 
     ::-webkit-scrollbar {
         width: 0.6rem;

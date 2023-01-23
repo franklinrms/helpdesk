@@ -1,4 +1,5 @@
 import prisma from "../../prisma/prisma";
+import createNewMessage from "../Chat/chat.service";
 import { ErrorTypes } from "../errors/catalog";
 import { IRequest } from "./request.interfaces";
 
@@ -32,13 +33,11 @@ const create = async (title: string, message: string, customerId: string): Promi
             customerId,
         }
     });
-    await prisma.message.create({
-        data: {
-            message,
-            requestId: newRequest.id,
-            userId: customerId,
-        }
-    });
+    await createNewMessage({
+        message,
+        requestId: newRequest.id,
+        userId: customerId,
+    })
     return newRequest.id;
 };
 
