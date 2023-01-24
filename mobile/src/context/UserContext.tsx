@@ -1,5 +1,4 @@
 import React, { useMemo, useState, createContext, useEffect, Dispatch, SetStateAction } from 'react';
-import { useNavigation } from '@react-navigation/native';
 import api, { setHeadersToken } from '../lib/api';
 
 export interface UserType {
@@ -34,8 +33,6 @@ interface UserProviderProps {
 function UserContextProvider({ children }: UserProviderProps): JSX.Element {
     const [user, setUser] = useState(DEFAULT_VALUE.user);
     const [token, setToken] = useState('');
-    const navigation = useNavigation();
-
 
     const userAuth = async (): Promise<void> => {
         setHeadersToken(token);
@@ -49,7 +46,7 @@ function UserContextProvider({ children }: UserProviderProps): JSX.Element {
     };
 
     useEffect(() => {
-        void userAuth()
+        if(token.length) void userAuth()
     }, [token]);
 
     const contextValue = useMemo(
