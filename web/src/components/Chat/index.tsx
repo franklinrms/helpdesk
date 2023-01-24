@@ -34,7 +34,7 @@ export default function Chat(): JSX.Element {
     const [details, setDetails] = useState<DetailsType>();
     const { user } = useContext(UserContext);
     const listRef = useRef<HTMLUListElement | null>(null);
-    const socket = io(baseURL);
+    const socket = io(`${baseURL}/chat`);
     const location = useLocation();
     const requestId = location.pathname.split('/')[3];
 

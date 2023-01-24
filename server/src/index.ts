@@ -1,5 +1,6 @@
 import { serverHttp } from './app';
 import './Chat/chat.websocket'
+import './Request/request.websocket'
 import 'dotenv/config';
 
 const PORT = process.env.PORT ?? 3031;

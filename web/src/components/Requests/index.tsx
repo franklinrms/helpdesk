@@ -17,7 +17,7 @@ export default function Requests(): JSX.Element {
     const [requests, setRequests] = useState([]);
     const [isSelectedFilter, setIsSelectedFilter] = useState('IN_PROGRESS');
 
-    const socket = io(baseURL);
+    const socket = io(`${baseURL}/requests`);
     const { userAuth } = useContext(UserContext);
 
     useEffect(() => {
@@ -38,11 +38,11 @@ export default function Requests(): JSX.Element {
         void getRequests();
     }, [isSelectedFilter]);
 
-    socket.on('request_update', () => {
+    socket.on('updated', () => {
         void getRequests();
     });
 
-    if (requests.length === 0) return <div>sem requisições</div>;
+    if (requests.length === 0) return <div />;
 
     return (
         <S.RequestsContainer filter={isSelectedFilter}>

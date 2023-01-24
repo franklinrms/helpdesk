@@ -11,15 +11,16 @@ interface RequestControlsProps {
 export default function RequestControls({
     requestId,
 }: RequestControlsProps): JSX.Element {
-    const socket = io(baseURL);
+    const socket = io(`${baseURL}/requests`);
     const onOrderUpdate = async (type: string): Promise<void> => {
         try {
             await api.patch(`request/${requestId}/${type}`);
-            socket.emit('request_update', 'update');
+            socket.emit('update', '');
         } catch (error) {
             console.error(error);
         }
     };
+
     return (
         <S.Container>
             <S.Button

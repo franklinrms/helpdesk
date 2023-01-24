@@ -2,7 +2,7 @@ import { io } from '../app'
 import createNewMessage from './chat.service'
 
 
-io.on('connection', (socket) => {
+io.of("/chat").on("connection", (socket) => {
     socket.on('request_id', (requestId) => {
         void socket.join(requestId)
     })
@@ -16,5 +16,4 @@ io.on('connection', (socket) => {
 
         socket.to(data.requestId).emit('message', message)
     })
-})
-
+});

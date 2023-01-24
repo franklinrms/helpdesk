@@ -29,4 +29,7 @@ export const Button = styled.button`
     &:hover {
         background-color: ${({ theme }) => theme.colors.surface_tertiary};
     }
+    &:active {
+        transform: scale(0.98);
+    }
 `;

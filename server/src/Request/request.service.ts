@@ -3,14 +3,12 @@ import createNewMessage from "../Chat/chat.service";
 import { ErrorTypes } from "../errors/catalog";
 import { IRequest } from "./request.interfaces";
 
-
 const read = async (type: string): Promise<IRequest[]> =>  await prisma.request.findMany(
     {
         where:{
             status:{
                 [type]: "DONE",
             }
-
         }
     }
 );
@@ -47,6 +45,7 @@ const create = async (title: string, message: string, customerId: string): Promi
         requestId: newRequest.id,
         userId: customerId,
     })
+    // socket.emit('update', '');
     return newRequest.id;
 };
 
