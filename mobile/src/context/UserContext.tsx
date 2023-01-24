@@ -21,7 +21,7 @@ const DEFAULT_VALUE = {
         role: '',
     },
     userAuth: () => {},
-    token: '',
+    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRkZDcyZGE0LWMwNDEtNDJlNy1hNzI0LWQ4ZDM5YWNmZWU3MiIsIm5hbWUiOiJVU0VSIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE2NzQ1OTYxNzZ9.GOFTnYzDMBJ0LwB_Lx_ozvHZXdAVj9TWPibuPJ0fyGw',
     setToken: () => {},
 };
 
@@ -32,7 +32,7 @@ interface UserProviderProps {
 }
 function UserContextProvider({ children }: UserProviderProps): JSX.Element {
     const [user, setUser] = useState(DEFAULT_VALUE.user);
-    const [token, setToken] = useState('');
+    const [token, setToken] = useState(DEFAULT_VALUE.token);
 
     const userAuth = async (): Promise<void> => {
         setHeadersToken(token);
@@ -46,7 +46,8 @@ function UserContextProvider({ children }: UserProviderProps): JSX.Element {
     };
 
     useEffect(() => {
-        if(token.length) void userAuth()
+        // if(token.length)
+        void userAuth()
     }, [token]);
 
     const contextValue = useMemo(
