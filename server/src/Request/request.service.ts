@@ -13,6 +13,19 @@ const read = async (type: string): Promise<IRequest[]> =>  await prisma.request.
     }
 );
 
+const readByUser = async (customerId: string, type: string): Promise<IRequest[]> =>  (
+    await prisma.request.findMany(
+        {
+            where:{
+                customerId,
+                status:{
+                    [type]: "DONE",
+                }
+            }
+        }
+    )
+);
+
 const readOne = async (id: string): Promise<IRequest> => {
     const request = await prisma.request.findUnique(
         {
@@ -77,4 +90,4 @@ const done = async (id: string): Promise<void> => {
     });
 }
 
-export default { read, readOne, create, inProgress, done }
+export default { read, readByUser, readOne, create, inProgress, done }

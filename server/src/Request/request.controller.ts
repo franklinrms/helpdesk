@@ -18,7 +18,9 @@ const readAll = async (req: Request, res: Response): Promise<Response> => {
     const { user } = res.locals;
 
     if (user.role === 'USER') {
-        return res.status(403).json({ message: unauthorized });
+        const response = await requestService
+            .readByUser(user.id, filter === 'DONE' ? 'equals' : 'not');
+        return res.status(200).json(response);
     }
     const response = await requestService.read(filter === 'DONE' ? 'equals' : 'not');
 
