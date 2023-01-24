@@ -20,6 +20,11 @@ export const Form = styled.form`
     padding: 64px;
     gap: 24px;
 
+    img {
+        width: 250px;
+        margin-bottom: 30px;
+    }
+
     div {
         position: relative;
         flex: 1 1 0%;

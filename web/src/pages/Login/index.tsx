@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Envelope, Key } from 'phosphor-react';
 import * as S from './styled';
 import bg from '../../assets/auth-page-bg.svg';
+import logo from '../../assets/logo.svg';
 import api from '../../lib/api';
 import { useNavigate } from 'react-router-dom';
 
@@ -31,6 +32,7 @@ export default function Login(): JSX.Element {
                     void onSubmitForm();
                 }}
             >
+                <img src={logo} alt="logo" />
                 <div>
                     <Envelope size={22} weight="bold" />
                     <input
