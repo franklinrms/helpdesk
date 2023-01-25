@@ -12,7 +12,7 @@ import { Request, RequestProps } from '../components/Request';
 import api, { setHeadersToken } from '../lib/api';
 
 export function Home() {
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [statusSelected, setStatusSelected] = useState<'IN_PROGRESS' | 'DONE'>('IN_PROGRESS');
     const [requests, setRequests] = useState<RequestProps[]>([]);
     const { setToken, token } = useContext(UserContext);
@@ -57,8 +57,8 @@ export function Home() {
             </Box>
             <IconButton
                 _pressed={{ bg: "gray.500" }}
-            icon={<SignOut size={26} color={colors.gray[300]} />}
-            onPress={() => { setToken('')}}
+                icon={<SignOut size={26} color={colors.gray[300]} />}
+                onPress={() => { setToken('')}}
             />
         </HStack>
 
