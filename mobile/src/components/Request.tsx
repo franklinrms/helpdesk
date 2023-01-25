@@ -27,7 +27,7 @@ export function Request({ data, ...rest }: Props) {
                 mb={4}
                 alignItems="center"
                 justifyContent="space-between"
-                rounded="sm"
+                rounded="lg"
                 overflow="hidden"
             >
                 <Box h="full" w={2} bg={statusColor} />

@@ -20,7 +20,7 @@ export function Message({ text, time, messageAuthor, ...rest }: Props) {
             {...rest}
         >
             <Box maxW='60%' alignItems={messageAuthor ? "flex-end" : "flex-start"}>
-                <Text color={ colors.gray[300] } fontSize="xs" mb={2} >
+                <Text color={ colors.gray[300] } fontSize="xs" mb={1} >
                     {dateFormat(time)}
                 </Text>
                 <Box
