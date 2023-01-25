@@ -36,7 +36,6 @@ function UserContextProvider({ children }: UserProviderProps): JSX.Element {
 
     const userAuth = async (): Promise<void> => {
         setHeadersToken(token);
-
         try {
             const { data } = await api.get('/validate');
             setUser(data);
@@ -46,8 +45,7 @@ function UserContextProvider({ children }: UserProviderProps): JSX.Element {
     };
 
     useEffect(() => {
-        // if(token.length)
-        void userAuth()
+        userAuth()
     }, [token]);
 
     const contextValue = useMemo(
