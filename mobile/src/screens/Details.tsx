@@ -1,13 +1,13 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { VStack, Text, HStack, useTheme, Box, FlatList, Icon, Pressable } from 'native-base';
 import { useRoute } from '@react-navigation/native';
+import { io } from 'socket.io-client';
 import api, { baseURL } from '../lib/api';
 import { CircleWavyCheck, Hourglass, PaperPlaneRight } from 'phosphor-react-native';
 import { Header } from '../components/Header';
 import { Message } from '../components/Message';
 import UserContext from '../context/UserContext';
 import { ChatInput } from '../components/ChatInput';
-import { io } from 'socket.io-client';
 
 interface MessageType {
     id: string;
