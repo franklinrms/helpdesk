@@ -95,6 +95,8 @@ export function Home() {
                         () => navigation.navigate('Details', { requestId: item.id })
                     } />}
                     showsVerticalScrollIndicator={false}
+                    refreshing={isLoading}
+                    onRefresh={getRequests}
                     contentContainerStyle={{ paddingBottom: 100 }}
                     ListEmptyComponent={() => (
                         <Center pt="50" >
