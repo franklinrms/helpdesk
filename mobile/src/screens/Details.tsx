@@ -8,6 +8,7 @@ import { Header } from '../components/Header';
 import { Message } from '../components/Message';
 import UserContext from '../context/UserContext';
 import { ChatInput } from '../components/ChatInput';
+import { ServiceEvaluation } from '../components/ServiceEvaluation';
 
 interface MessageType {
     id: string;
@@ -37,6 +38,7 @@ export function Details() {
     const [messages, setMessages] = useState<MessageType[]>([]);
     const [details, setDetails] = useState<DetailsType>({} as DetailsType);
     const [newMessage, setNewMessage] = useState('');
+    const [modalVisible, setModalVisible] = useState(true);
     const { user } = useContext(UserContext);
 
     const socket = io(`${baseURL}/chat`);
@@ -91,6 +93,10 @@ export function Details() {
     }
     return (
         <VStack flex={1} bg="gray.700">
+            <ServiceEvaluation
+                modalVisible={modalVisible}
+                setModalVisible={() => setModalVisible(false) }
+            />
             <Box px={6} bg="gray.600">
                 <Header title={details.title} />
             </Box>
@@ -134,8 +140,7 @@ export function Details() {
                             />
                         </Pressable>
                     )}
-                />
-                )
+                />)
             }
       </VStack>
     );
