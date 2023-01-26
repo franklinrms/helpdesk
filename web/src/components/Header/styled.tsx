@@ -11,6 +11,10 @@ export const Container = styled.header`
         ${({ theme }) => theme.mixins.flexCenter};
         gap: 20px;
 
+        span {
+            margin: 0 30px;
+        }
+
         button {
             ${({ theme }) => theme.mixins.flexCenter};
             padding: 10px;

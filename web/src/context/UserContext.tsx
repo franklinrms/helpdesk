@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React, { useMemo, useState, createContext } from 'react';
+import React, {
+    useMemo,
+    useState,
+    createContext,
+    Dispatch,
+    SetStateAction,
+} from 'react';
 import api, { setToken } from '../lib/api';
 
 export interface UserType {
@@ -11,6 +17,8 @@ export interface UserType {
 interface PropsUserContext {
     user: UserType;
     userAuth: () => void;
+    modalIsOpen: boolean;
+    setModalIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const DEFAULT_VALUE = {
@@ -20,6 +28,8 @@ const DEFAULT_VALUE = {
         role: '',
     },
     userAuth: () => {},
+    modalIsOpen: false,
+    setModalIsOpen: () => {},
 };
 
 const UserContext = createContext<PropsUserContext>(DEFAULT_VALUE);
@@ -29,6 +39,7 @@ interface UserProviderProps {
 }
 function UserContextProvider({ children }: UserProviderProps): JSX.Element {
     const [user, setUser] = useState(DEFAULT_VALUE.user);
+    const [modalIsOpen, setModalIsOpen] = useState(DEFAULT_VALUE.modalIsOpen);
 
     const getToken = (): void => {
         const token = sessionStorage.getItem(
@@ -52,8 +63,10 @@ function UserContextProvider({ children }: UserProviderProps): JSX.Element {
         () => ({
             user,
             userAuth,
+            modalIsOpen,
+            setModalIsOpen,
         }),
-        [user]
+        [user, modalIsOpen]
     );
 
     return (

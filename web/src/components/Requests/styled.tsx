@@ -68,10 +68,10 @@ export const RequestsContainer = styled.div`
     }
 
     ::-webkit-scrollbar {
+        display: none;
         width: 0.6rem;
         height: 0.6rem;
         margin-right: 10px;
-        display: none;
     }
     ::-webkit-scrollbar-corner {
         background: none;
@@ -84,5 +84,11 @@ export const RequestsContainer = styled.div`
     ::-webkit-scrollbar-track {
         background-color: transparent;
         border: none;
+    }
+
+    &:hover {
+        ::-webkit-scrollbar {
+            display: block;
+        }
     }
 `;

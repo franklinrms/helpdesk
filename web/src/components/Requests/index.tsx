@@ -42,8 +42,6 @@ export default function Requests(): JSX.Element {
         void getRequests();
     });
 
-    if (requests.length === 0) return <div />;
-
     return (
         <S.RequestsContainer filter={isSelectedFilter}>
             <div className="details">
@@ -74,9 +72,10 @@ export default function Requests(): JSX.Element {
                 </button>
             </div>
 
-            {requests.map((request: RequestType) => (
-                <RequestCard key={request.id} request={request} />
-            ))}
+            {requests.length > 0 &&
+                requests.map((request: RequestType) => (
+                    <RequestCard key={request.id} request={request} />
+                ))}
         </S.RequestsContainer>
     );
 }
