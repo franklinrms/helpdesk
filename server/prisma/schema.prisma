@@ -29,6 +29,7 @@ model Request {
     customerId String
     status     String    @default("NEW")
     messages   Message[]
+    assessment String?
     createdAt  DateTime  @default(now())
 
     @@map("requests")
@@ -56,4 +57,10 @@ model Message {
 //     NEW
 //     IN_PROGRESS
 //     DONE
+// }
+
+// enum Assessment {
+//     BAD
+//     NEUTRAL
+//     GOOD
 // }

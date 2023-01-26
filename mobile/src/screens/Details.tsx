@@ -17,7 +17,6 @@ interface MessageType {
     userId: string;
     createdAt: string;
 }
-
 interface DetailsType {
     title: string;
     status: string;
@@ -26,22 +25,24 @@ interface DetailsType {
         name: string;
         id: string;
     };
+    assessment? : string;
     messages?: [];
 }
-
 interface RouteParams {
     requestId: string;
-  }
+}
+
 
 export function Details() {
     const [isLoading, setIsLoading] = useState(true);
     const [messages, setMessages] = useState<MessageType[]>([]);
     const [details, setDetails] = useState<DetailsType>({} as DetailsType);
     const [newMessage, setNewMessage] = useState('');
-    const [modalVisible, setModalVisible] = useState(true);
+    const [modalVisible, setModalVisible] = useState(false);
     const { user } = useContext(UserContext);
 
     const socket = io(`${baseURL}/chat`);
+    const requestsSocket = io(`${baseURL}/requests`);
     const route = useRoute();
     const { colors } = useTheme();
     const { requestId } = route.params as RouteParams;
@@ -61,10 +62,23 @@ export function Details() {
             console.error(error);
         }
     };
+
     useEffect(() => {
         void getMessages();
         socket.emit('request_id', requestId);
     }, [requestId]);
+
+    useEffect(() => {
+        if(details.status === 'DONE' && !details.assessment) {
+            setModalVisible(true);
+        }
+    }, [details]);
+
+    requestsSocket.on('updated', (id: string) => {
+        if(requestId === id) {
+            void getMessages();
+        }
+    });
 
     socket.on('message', (data: MessageType) => {
         setMessages([...messages, data]);
@@ -94,6 +108,7 @@ export function Details() {
     return (
         <VStack flex={1} bg="gray.700">
             <ServiceEvaluation
+                requestId={requestId}
                 modalVisible={modalVisible}
                 setModalVisible={() => setModalVisible(false) }
             />

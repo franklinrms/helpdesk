@@ -35,6 +35,7 @@ const readOne = async (id: string): Promise<IRequest> => {
             select: {
                 title: true,
                 status: true,
+                assessment: true,
                 customer: {
                     select: { name : true, id: true },
                 },
@@ -90,4 +91,18 @@ const done = async (id: string): Promise<void> => {
     });
 }
 
-export default { read, readByUser, readOne, create, inProgress, done }
+const assessment = async (id: string, assessment: string): Promise<void> => {
+    const thereIsRequest = await readOne(id);
+    if (thereIsRequest === null) throw new Error(ErrorTypes.EntityNotFound);
+
+    await prisma.request.update({
+        where: {
+            id,
+        },
+        data: {
+            assessment,
+        }
+    });
+}
+
+export default { read, readByUser, readOne, create, inProgress, done, assessment }

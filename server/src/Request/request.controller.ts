@@ -56,5 +56,12 @@ const requestDone = async (req: Request, res: Response): Promise<Response> => {
 
     return res.sendStatus(200);
 }
+const requestAssessment = async (req: Request, res: Response): Promise<Response> => {
+    const { assessment } = req.query;
 
-export default { create, readAll, readOne, requestInProgress, requestDone };
+    await requestService.assessment(req.params.id, assessment as string);
+
+    return res.sendStatus(200);
+}
+
+export default { create, readAll, readOne, requestInProgress, requestDone, requestAssessment };

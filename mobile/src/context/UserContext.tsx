@@ -21,7 +21,7 @@ const DEFAULT_VALUE = {
         role: '',
     },
     userAuth: () => {},
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRkZDcyZGE0LWMwNDEtNDJlNy1hNzI0LWQ4ZDM5YWNmZWU3MiIsIm5hbWUiOiJVU0VSIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE2NzQ2NjkwNzh9.6zvN-F1550HnT5k3qLeN0QfFJ2m9Lpiff99ozrFdY2o',
+    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhjNTUxNjk5LTk3OGMtNGY2YS1hZDFhLTc3NWE4MTc2NzM1YyIsIm5hbWUiOiJVU0VSIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE2NzQ3NDU4Nzh9.hkhCXb2x-zG3Otuh2BwFgCXgn5MqbO0JhCJTrme84cc',
     setToken: () => {},
 };
 

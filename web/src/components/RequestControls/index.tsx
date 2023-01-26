@@ -15,7 +15,7 @@ export default function RequestControls({
     const onOrderUpdate = async (type: string): Promise<void> => {
         try {
             await api.patch(`request/${requestId}/${type}`);
-            socket.emit('update', '');
+            socket.emit('update', requestId);
         } catch (error) {
             console.error(error);
         }

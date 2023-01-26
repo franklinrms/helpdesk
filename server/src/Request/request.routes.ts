@@ -10,6 +10,7 @@ requestRoute.get('/', validateToken, requestController.readAll);
 requestRoute.get('/:id', validateToken, requestController.readOne);
 requestRoute.patch('/:id/progress', validateToken, requestController.requestInProgress);
 requestRoute.patch('/:id/done', validateToken, requestController.requestDone);
+requestRoute.patch('/:id/assessment', validateToken, requestController.requestAssessment);
 
 
 export default requestRoute;
