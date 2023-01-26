@@ -13,6 +13,9 @@
     "start": "node ./dist/src/index.js",
     "studio": "npx prisma studio"
   },
+  "prisma": {
+    "seed": "npx ts-node prisma/seed.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
