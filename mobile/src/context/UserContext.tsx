@@ -21,7 +21,7 @@ const DEFAULT_VALUE = {
         role: '',
     },
     userAuth: () => {},
-    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhjNTUxNjk5LTk3OGMtNGY2YS1hZDFhLTc3NWE4MTc2NzM1YyIsIm5hbWUiOiJVU0VSIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE2NzQ3NDU4Nzh9.hkhCXb2x-zG3Otuh2BwFgCXgn5MqbO0JhCJTrme84cc',
+    token: '',
     setToken: () => {},
 };
 
@@ -45,7 +45,7 @@ function UserContextProvider({ children }: UserProviderProps): JSX.Element {
     };
 
     useEffect(() => {
-        userAuth()
+        if(token.length) void userAuth()
     }, [token]);
 
     const contextValue = useMemo(

@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { Alert } from 'react-native';
-import { VStack, Heading, Icon, useTheme, Button as ButtonNativeBase, Text } from 'native-base';
-import { Envelope, IdentificationBadge, Key } from 'phosphor-react-native';
+import { VStack, Heading, Icon, useTheme, Button as ButtonNativeBase, Text, Image, Center } from 'native-base';
+import { ChatTeardropText, Envelope, IdentificationBadge, Key } from 'phosphor-react-native';
 
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
@@ -42,6 +42,12 @@ export function Login() {
 
     return (
         <VStack flex={1} alignItems="center" bg="gray.600" px={8} pt={24}>
+            <Center flexDirection="row" mt={20} >
+                <ChatTeardropText color={colors.white} size={50} />
+                <Text px='1' color={colors.white} fontSize="4xl" fontWeight="medium">
+                    HelpDesk
+                </Text>
+            </Center>
             <Heading color="gray.100" fontSize="xl" mt={20} mb={6}>
                 {isSignUp ? "Cadastre-se" : "Acesse sua conta"}
             </Heading>
