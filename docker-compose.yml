@@ -1,0 +1,53 @@
+version: '3.9'
+services:
+  mobile:
+    container_name: app_mobile
+    build: ./mobile
+    ports:
+      - 19000:19000
+      - 19006:19006
+    working_dir: /app-mobile
+    volumes:
+      - ./mobile/src:/app-mobile/src
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "lsof", "-t", "-i:19000" ]
+      timeout: 10s
+      retries: 5
+
+  frontend:
+    build: ./web
+    ports:
+      - 3000:3000
+    working_dir: /app-frontend
+    volumes:
+      - ./web/src:/app-frontend/src
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      - REACT_APP_BASE_URL=http://localhost:3030
+    healthcheck:
+      test: [ "CMD", "lsof", "-t", "-i:3000" ]
+      timeout: 10s
+      retries: 5
+
+  backend:
+    container_name: app_backend
+    build: ./server
+    ports:
+      - 3030:3030
+      - 5555:5555
+    working_dir: /app-backend
+    volumes:
+      - ./server/src:/app-backend/src
+    environment:
+      - PORT=3030
+      - JWT_SECRET=jwt_secret
+      - DATABASE_URL=file:./dev.db
+    healthcheck:
+      test: [ "CMD", "lsof", "-t", "-i:3030" ]
+      timeout: 10s
+      retries: 5
