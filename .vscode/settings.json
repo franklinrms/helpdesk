@@ -1,0 +1,9 @@
+{
+    "eslint.workingDirectories": [
+      "./server",
+      "./web"
+    ],
+    "cSpell.words": [
+      "franklinrms"
+    ]
+}

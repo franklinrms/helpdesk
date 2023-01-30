@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id       String    @id @default(uuid())
+    email    String    @unique
+    password String
+    name     String
+    role     String    @default("USER")
+    requests Request[]
+    messages Message[]
+
+    @@map("users")
+}
+
+model Request {
+    id         String    @id @default(uuid())
+    title      String
+    customer   User      @relation(fields: [customerId], references: [id], onDelete: Cascade)
+    customerId String
+    status     String    @default("NEW")
+    messages   Message[]
+    assessment String?
+    createdAt  DateTime  @default(now())
+
+    @@map("requests")
+}
+
+model Message {
+    id        String   @id @default(uuid())
+    message   String
+    request   Request  @relation(fields: [requestId], references: [id], onDelete: Cascade)
+    requestId String
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId    String
+    createdAt DateTime @default(now())
+
+    @@map("messages")
+}
+
+// enum Role {
+//     USER
+//     ADMIN
+//     HELPER
+// }
+
+// enum Status {
+//     NEW
+//     IN_PROGRESS
+//     DONE
+// }
+
+// enum Assessment {
+//     BAD
+//     NEUTRAL
+//     GOOD
+// }

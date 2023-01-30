@@ -1,0 +1,9 @@
+{
+    "name": "help-desk",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "compose": "docker-compose up -d --build"
+    },
+    "author": "Franklin Ramos"
+}
