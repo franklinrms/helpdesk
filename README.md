@@ -22,10 +22,9 @@ Esta aplicação é uma central de ajuda para usuários de um aplicativo móvel.
 <br>
 
 <div style="display:flex;justify-content:space-around;flex-flow:row wrap">
-  <img src="./.github/frame-01.png" height="400px"/>
+  <img src="./.github/frame-01.png" />
   <img src="./.github/frame-07.jpg" height="400px"/>
   <img src="./.github/frame-03.jpg" height="400px"/>
-  <img src="./.github/frame-06.jpg" height="400px"/>
   <img src="./.github/frame-05.jpg" height="400px"/>
   <img src="./.github/frame-04.jpg" height="400px"/>
 </div>
