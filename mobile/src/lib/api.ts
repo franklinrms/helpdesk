@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-export const baseURL = 'http://192.168.15.11:3030'; // IP da maquina que está rodando o backend
+const IP = '192.168.15.11'; // IP da maquina que está rodando o backend
+
+export const baseURL = `http://${IP}:3030`;
 
 const api = axios.create({
     baseURL,

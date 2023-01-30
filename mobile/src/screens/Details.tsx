@@ -82,7 +82,7 @@ export function Details() {
 
     socket.on('message', (data: MessageType) => {
         setMessages([...messages, data]);
-        flatListRef.current?.scrollToIndex({ index: messages.length - 1, animated: true });
+        // flatListRef.current?.scrollToIndex({ index: messages.length - 1, animated: true });
     });
 
     const renderItem = useCallback(({item}: {
