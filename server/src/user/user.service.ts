@@ -1,5 +1,5 @@
 import md5 from 'md5'
-import { prisma } from '../../prisma'
+import { prisma } from '../lib/prisma'
 import { ErrorTypes } from '../errors/catalog'
 import { UserRegisterDto } from './user.dto'
 
