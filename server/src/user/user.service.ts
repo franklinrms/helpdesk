@@ -2,6 +2,7 @@ import md5 from 'md5'
 import { prisma } from '../lib/prisma'
 import { ErrorTypes } from '../errors/catalog'
 import { UserRegisterDto } from './user.dto'
+import { generateToken } from '../lib/generateToken'
 
 export class UserService {
   private getUserByEmail = async (email: string) =>
@@ -33,7 +34,7 @@ export class UserService {
           role: true,
         },
       })
-      return user
+      return generateToken(user)
     }
   }
 }

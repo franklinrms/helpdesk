@@ -10,6 +10,6 @@ export class UserController {
 
   public create = async (req: Request, res: Response): Promise<Response> => {
     const response = await this.userService.create(req.body)
-    return res.status(201).json(response)
+    return res.status(201).json({ token: response })
   }
 }
