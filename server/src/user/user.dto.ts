@@ -16,3 +16,10 @@ export const UserRegisterSchema = z.object({
 })
 
 export type UserRegisterDto = z.infer<typeof UserRegisterSchema>
+
+export const UserLoginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6),
+})
+
+export type UserLoginDto = z.infer<typeof UserLoginSchema>
