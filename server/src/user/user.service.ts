@@ -1,16 +1,12 @@
-import type { PrismaClient } from '@prisma/client'
+import prisma from '../lib/prisma/client'
 import md5 from 'md5'
 import { ErrorTypes } from '../errors/catalog'
 import { UserLoginDto, UserRegisterDto } from './user.dto'
 import { generateToken } from '../lib/generateToken'
 
 export class UserService {
-  constructor(private prisma: PrismaClient) {
-    this.prisma = prisma
-  }
-
   private getUserByEmail = async (email: string) =>
-    this.prisma.user.findUnique({
+    prisma.user.findUnique({
       where: {
         email,
       },
@@ -24,7 +20,7 @@ export class UserService {
 
   public async createUser({ name, email, password, role }: UserRegisterDto) {
     if (await this.validateEmail(email)) {
-      const user = await this.prisma.user.create({
+      const user = await prisma.user.create({
         data: {
           name,
           email,
@@ -38,7 +34,9 @@ export class UserService {
           role: true,
         },
       })
-      return generateToken(user)
+      const token = generateToken(user)
+
+      return { token }
     }
   }
 
@@ -49,11 +47,13 @@ export class UserService {
       throw new Error(ErrorTypes.EntityNotFound)
     }
 
-    return generateToken({
+    const token = generateToken({
       id: user.id,
       name: user.name,
       email: user.email,
       role: user.role,
     })
+
+    return { token }
   }
 }
