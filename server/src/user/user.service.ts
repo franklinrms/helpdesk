@@ -1,12 +1,14 @@
-import prisma from '../lib/prisma/client'
 import md5 from 'md5'
+import type { PrismaClient } from '@prisma/client'
 import { ErrorTypes } from '../errors/catalog'
 import { UserLoginDto, UserRegisterDto } from './user.dto'
 import { generateToken } from '../lib/generateToken'
 
 export class UserService {
+  constructor(private prisma: PrismaClient) {}
+
   private getUserByEmail = async (email: string) =>
-    prisma.user.findUnique({
+    this.prisma.user.findUnique({
       where: {
         email,
       },
@@ -20,7 +22,7 @@ export class UserService {
 
   public async createUser({ name, email, password, role }: UserRegisterDto) {
     if (await this.validateEmail(email)) {
-      const user = await prisma.user.create({
+      const user = await this.prisma.user.create({
         data: {
           name,
           email,

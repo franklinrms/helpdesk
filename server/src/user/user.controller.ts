@@ -1,20 +1,16 @@
 import { Request, Response } from 'express'
-import { UserService } from './user.service'
+import type { UserService } from './user.service'
 
 export class UserController {
-  private userService: UserService
-
-  constructor() {
-    this.userService = new UserService()
-  }
+  constructor(private service: UserService) {}
 
   public create = async (req: Request, res: Response): Promise<Response> => {
-    const response = await this.userService.createUser(req.body)
+    const response = await this.service.createUser(req.body)
     return res.status(201).json(response)
   }
 
   public login = async (req: Request, res: Response): Promise<Response> => {
-    const response = await this.userService.findUser(req.body)
+    const response = await this.service.findUser(req.body)
     return res.status(200).json(response)
   }
 }
