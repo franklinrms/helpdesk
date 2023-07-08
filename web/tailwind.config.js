@@ -15,7 +15,7 @@ module.exports = {
       },
       fontSize: {
         'dynamic-sm': 'clamp(1rem, 5vw, 1.25rem)',
-        'dynamic': 'clamp(1.5rem, 5vw, 1.75rem)',
+        dynamic: 'clamp(1.5rem, 5vw, 1.75rem)',
         'dynamic-xl': 'clamp(2.375rem, 8vw, 5rem)',
       },
     },
