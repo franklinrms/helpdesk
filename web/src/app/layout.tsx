@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="pt-br" className="scroll-smooth">
       <body
-        className={`${roboto.variable} bg-zinc-950 font-sans leading-relaxed text-zinc-50 antialiased`}
+        className={`${roboto.variable} bg-zinc-950 font-sans leading-relaxed text-zinc-50 antialiased selection:bg-emerald-300 selection:text-black`}
       >
         {children}
       </body>
