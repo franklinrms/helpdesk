@@ -17,11 +17,55 @@ model User {
     password String
     role     Role   @default(USER)
 
+    Messages Message[]
+    Tickets  Ticket[]  @relation("author")
+    Assigned Ticket[]  @relation("support")
+
     @@map("users")
 }
 
 enum Role {
     ADMIN
-    HELPER
+    SUPPORT
     USER
+}
+
+model Ticket {
+    id         String    @id @default(auto()) @map("_id") @db.ObjectId
+    title      String
+    status     Status    @default(NEW)
+    rating     Rating?
+    messages   Message[]
+    author     User      @relation("author", fields: [authorId], references: [id], onDelete: Cascade)
+    authorId   String    @map("author_id")
+    assignee   User?     @relation("support", fields: [assigneeId], references: [id], onDelete: Cascade)
+    assigneeId String?   @map("assignee_id")
+    createdAt  DateTime  @default(now()) @map("created_at")
+    updatedAt  DateTime  @default(now()) @map("updated_at")
+
+    @@map("tickets")
+}
+
+enum Status {
+    NEW
+    OPEN
+    CLOSED
+}
+
+enum Rating {
+    BAD
+    OK
+    GOOD
+}
+
+model Message {
+    id        String   @id @default(cuid()) @map("_id")
+    content   String
+    author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+    authorId  String   @map("author_id")
+    createdAt DateTime @default(now()) @map("created_at")
+    Ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+    ticketId  String   @db.ObjectId
+
+    @@map("messages")
 }

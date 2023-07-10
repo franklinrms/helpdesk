@@ -12,7 +12,7 @@ export const UserRegisterSchema = z.object({
   name: z.string(),
   email: z.string().email(),
   password: z.string().min(6),
-  role: z.enum(['ADMIN', 'HELPER', 'USER']).default('USER'),
+  role: z.enum(['ADMIN', 'SUPPORT', 'USER']).default('USER'),
 })
 
 export type UserRegisterDto = z.infer<typeof UserRegisterSchema>
