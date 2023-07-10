@@ -4,6 +4,7 @@ export enum ErrorTypes {
   EntityNotFound = 'EntityNotFound',
   Unauthorized = 'Unauthorized',
   EmailInvalid = 'EmailInvalid',
+  BadRequest = 'BadRequest',
 }
 
 type ErrorResponseObject = {
@@ -27,5 +28,9 @@ export const errorCatalog: ErrorCatalog = {
   EmailInvalid: {
     message: 'Email already registered',
     httpStatus: 409,
+  },
+  BadRequest: {
+    message: 'Bad Request',
+    httpStatus: 400,
   },
 }
