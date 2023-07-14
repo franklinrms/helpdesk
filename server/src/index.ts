@@ -1,7 +1,17 @@
 import 'dotenv/config'
 
 import App from './app'
+import { connectToDatabase } from './lib/mongo/connection'
 
 const PORT = process.env.PORT || 3001
 
-new App().start(PORT)
+connectToDatabase()
+  .then(() => {
+    new App().start(PORT)
+  })
+  .catch((error) => {
+    console.log('Connection with database generated an error:\r\n')
+    console.error(error)
+    console.log('\r\nServer initialization cancelled')
+    process.exit(0)
+  })
