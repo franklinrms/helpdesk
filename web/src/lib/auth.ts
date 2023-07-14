@@ -2,7 +2,7 @@
 import { cookies } from 'next/headers'
 import decode from 'jwt-decode'
 
-interface User {
+export interface User {
   id: string
   name: string
   email: string
