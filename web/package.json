@@ -16,6 +16,7 @@
     "dayjs": "^1.11.9",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.7",
+    "eventsource": "^2.0.2",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^3.1.2",
     "lucide-react": "^0.257.0",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^1.2.0",
+    "@types/eventsource": "^1.1.11",
     "@types/js-cookie": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.3.0"
   }
