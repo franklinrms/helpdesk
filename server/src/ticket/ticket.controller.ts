@@ -3,6 +3,7 @@ import type { TicketService } from './ticket.service'
 import { UserDto } from '../user/user.dto'
 import { Status } from '@prisma/client'
 import { ErrorTypes } from '../errors/catalog'
+import { prepStream, sendEvent } from '../lib/sse'
 
 export class TicketController {
   constructor(private service: TicketService) {}
@@ -16,8 +17,16 @@ export class TicketController {
   }
 
   public findAll = async (req: Request, res: Response): Promise<Response> => {
-    // const {  } = req.query
-    const response = await this.service.findAll()
+    const { byUser } = req.query
+    const { user } = res.locals as { user: UserDto }
+
+    let response
+
+    if (byUser) {
+      response = await this.service.findByUser(user.id)
+    } else {
+      response = await this.service.findAll()
+    }
     return res.status(200).json(response)
   }
 
@@ -38,5 +47,13 @@ export class TicketController {
     await this.service.updateStatus(id, status as Status, user.id)
 
     return res.sendStatus(200)
+  }
+
+  public subscribeEvents = (_req: Request, res: Response) => {
+    prepStream(res)
+
+    this.service.subscribeEvents().forEach(({ event, data }) => {
+      sendEvent(res, event, data)
+    })
   }
 }

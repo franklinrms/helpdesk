@@ -13,6 +13,7 @@ const ticketController = new TicketController(ticketService)
 
 ticketRouter.post('/', validate(NewTicketSchema), ticketController.create)
 ticketRouter.get('/', ticketController.findAll)
+ticketRouter.get('/subscribe', ticketController.subscribeEvents)
 
 ticketRouter.patch('/:id/status', ticketController.updateStatus)
 
