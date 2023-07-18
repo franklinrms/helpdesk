@@ -1,30 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-import Cookie from 'js-cookie'
+
 import { MessagesSquare } from 'lucide-react'
 import dayjs from 'dayjs'
 import ptBR from 'dayjs/locale/pt-br'
-import { apiUrl } from '@/lib/apiUrl'
 import { ITicket } from '@/models'
+import { StatusUpdateButton } from './StatusUpdateButton'
 
 dayjs.locale(ptBR)
 
 export function Ticket({ data: ticket }: { data: ITicket }) {
-  const token = Cookie.get('token') || ''
-
-  const answer = async () => {
-    const response = await fetch(
-      apiUrl(`/ticket/${ticket.id}/status?status=OPEN`),
-      {
-        method: 'PATCH',
-        headers: { authorization: token },
-      },
-    )
-
-    if (response.ok) {
-      window.location.href = `/dashboard/ticket/${ticket.id}`
-    }
-  }
-
   return (
     <div
       data-status={ticket.status}
@@ -39,9 +23,12 @@ export function Ticket({ data: ticket }: { data: ITicket }) {
         </div>
         <div className="flex flex-col items-center py-6">
           <h3 className="text-center text-lg font-medium">{ticket.title}</h3>
-          <span className="text-sm text-zinc-500 before:content-['#']">
+          <a
+            href={`/dashboard/ticket/${ticket.id}`}
+            className="text-sm text-zinc-500 before:content-['#'] hover:underline"
+          >
             {ticket.id}
-          </span>
+          </a>
         </div>
       </div>
       <div className="flex items-center justify-between pt-2">
@@ -52,12 +39,9 @@ export function Ticket({ data: ticket }: { data: ITicket }) {
             </span>
           )}
         </div>
-        <button
-          onClick={answer}
-          className="select-none rounded-xl bg-zinc-900 px-3 py-2 transition-colors hover:bg-zinc-800"
-        >
+        <StatusUpdateButton status={ticket.status} ticketId={ticket.id}>
           Responder
-        </button>
+        </StatusUpdateButton>
       </div>
     </div>
   )
