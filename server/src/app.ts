@@ -2,6 +2,7 @@ import 'express-async-errors'
 
 import express from 'express'
 import cors from 'cors'
+import compression from 'compression'
 import routes from './routes'
 import errorHandler from './middlewares/errorHandler'
 
@@ -15,6 +16,7 @@ export default class App {
 
   private config(): void {
     this.app.use(cors())
+    this.app.use(compression())
     this.app.use(express.json())
     this.app.use(routes)
     this.app.use(errorHandler)
