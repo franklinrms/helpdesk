@@ -93,4 +93,31 @@ export class TicketService {
       })
     })
   }
+
+  public subscribeEventsByUser(userId: string): Observable<{
+    event: 'ticket-updated'
+    data: Ticket
+  }> {
+    return new Observable((observer) => {
+      this.watchTicketChanges([
+        {
+          $match: {
+            operationType: 'update',
+            $or: [
+              { 'fullDocument.assignee_id': userId },
+              { 'fullDocument.author_id': userId },
+            ],
+          },
+        },
+      ]).on('change', async (data: ChangeStreamInsertDocument) => {
+        const ticket = await this.prisma.ticket.findUnique({
+          where: { id: data.documentKey._id + '' },
+        })
+        observer.next({
+          event: 'ticket-updated',
+          data: ticket!,
+        })
+      })
+    })
+  }
 }

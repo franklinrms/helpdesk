@@ -49,11 +49,20 @@ export class TicketController {
     return res.sendStatus(200)
   }
 
-  public subscribeEvents = (_req: Request, res: Response) => {
+  public subscribeEvents = (req: Request, res: Response) => {
+    const { byUser } = req.query
+    const { user } = res.locals as { user: UserDto }
+
     prepStream(res)
 
-    this.service.subscribeEvents().forEach(({ event, data }) => {
-      sendEvent(res, event, data)
-    })
+    if (byUser) {
+      this.service.subscribeEventsByUser(user.id).forEach(({ event, data }) => {
+        sendEvent(res, event, data)
+      })
+    } else {
+      this.service.subscribeEvents().forEach(({ event, data }) => {
+        sendEvent(res, event, data)
+      })
+    }
   }
 }
