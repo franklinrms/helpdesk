@@ -5,6 +5,7 @@ import dayjs from 'dayjs'
 import ptBR from 'dayjs/locale/pt-br'
 import { ITicket } from '@/models'
 import { StatusUpdateButton } from './StatusUpdateButton'
+import Link from 'next/link'
 
 dayjs.locale(ptBR)
 
@@ -23,12 +24,12 @@ export function Ticket({ data: ticket }: { data: ITicket }) {
         </div>
         <div className="flex flex-col items-center py-6">
           <h3 className="text-center text-lg font-medium">{ticket.title}</h3>
-          <a
+          <Link
             href={`/dashboard/ticket/${ticket.id}`}
             className="text-sm text-zinc-500 before:content-['#'] hover:underline"
           >
             {ticket.id}
-          </a>
+          </Link>
         </div>
       </div>
       <div className="flex items-center justify-between pt-2">
@@ -39,7 +40,7 @@ export function Ticket({ data: ticket }: { data: ITicket }) {
             </span>
           )}
         </div>
-        <StatusUpdateButton status={ticket.status} ticketId={ticket.id}>
+        <StatusUpdateButton status="OPEN" ticketId={ticket.id}>
           Responder
         </StatusUpdateButton>
       </div>

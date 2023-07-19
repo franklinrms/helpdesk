@@ -2,6 +2,7 @@
 
 import { ButtonHTMLAttributes } from 'react'
 import Cookie from 'js-cookie'
+import { useRouter } from 'next/navigation'
 import { BadgeCheck } from 'lucide-react'
 import { apiUrl } from '@/lib/apiUrl'
 
@@ -12,19 +13,19 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 export function StatusUpdateButton({ status, ticketId, ...rest }: Props) {
   const token = Cookie.get('token') || ''
 
-  const handleStatusUpdate = async () => {
-    const newStatus = status === 'NEW' ? 'OPEN' : 'CLOSED'
+  const { push } = useRouter()
 
+  const handleStatusUpdate = async () => {
     const response = await fetch(
-      apiUrl(`/ticket/${ticketId}/status?status=${newStatus}`),
+      apiUrl(`/ticket/${ticketId}/status?status=${status}`),
       {
         method: 'PATCH',
         headers: { authorization: token },
       },
     )
 
-    if (status === 'NEW' && response.ok) {
-      window.location.href = `/dashboard/ticket/${ticketId}`
+    if (status === 'OPEN' && response.ok) {
+      push(`/dashboard/ticket/${ticketId}`)
     }
   }
 
