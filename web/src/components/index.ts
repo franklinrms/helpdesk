@@ -1,4 +1,5 @@
 export { Button } from './Button'
+export { Chat } from './Chat'
 export { Copyright } from './Copyright'
 export { Input } from './Input'
 export { Sidebar } from './Sidebar'
